@@ -27328,7 +27328,7 @@ const MainView = ()=>{
         {
             id: 1,
             title: "Zootopia",
-            image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdisney.fandom.com%2Fwiki%2FZootopia%2FGallery&psig=AOvVaw01bzq_3imoR6ggXvwearfq&ust=1697912448923000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLiYtPiehYIDFQAAAAAdAAAAABAE",
+            image: "https://lumiere-a.akamaihd.net/v1/images/movie_poster_zootopia_866a1bf2.jpeg",
             description: "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.",
             director: "Byron Howard, Rich Moore, Jared Bush",
             genre: "Comedy"
@@ -27336,7 +27336,7 @@ const MainView = ()=>{
         {
             id: 2,
             title: "The Longest Yard",
-            image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FThe_Longest_Yard_%25282005_film%2529&psig=AOvVaw3twc3pxg-wrZ8x4Gy8qmxC&ust=1697912879554000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOiFv8WghYIDFQAAAAAdAAAAABAE",
+            image: "https://m.media-amazon.com/images/I/6170kKD3zGL._AC_UF894,1000_QL80_.jpg",
             description: "Prison inmates form a football team to challenge the prison guards.",
             director: "Peter Segal",
             genre: "Comedy"
@@ -27344,7 +27344,7 @@ const MainView = ()=>{
         {
             id: 3,
             title: "The Hobbit: An Unexpected Journey",
-            image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FHobbit-Unexpected-Sir-Ian-McKellen%2Fdp%2FB00BWJ6JO4&psig=AOvVaw2OCynjTxA30mWz14B4rbll&ust=1697913247770000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJiixPOhhYIDFQAAAAAdAAAAABAE",
+            image: "https://www.themoviedb.org/t/p/w500/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg",
             description: "An Unexpected Journey tells the tale of Bilbo Baggins (Martin Freeman), who is convinced by the wizard Gandalf (Ian McKellen) to accompany thirteen Dwarves, led by Thorin Oakenshield (Richard Armitage), on a quest to reclaim the Lonely Mountain from the dragon Smaug.",
             director: "Peter Jackson",
             genre: "Action, Adventure"
@@ -27356,34 +27356,34 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 44,
+        lineNumber: 41,
         columnNumber: 5
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 50,
+        lineNumber: 47,
         columnNumber: 12
     }, undefined);
     else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                 movie: movie,
                 onMovieClick: (newSelectedMovie)=>{
-                    setSelectedBook(newSelectedMovie);
+                    setSelectedMovie(newSelectedMovie);
                 }
             }, movie.id, false, {
                 fileName: "src/components/MainView/main-view.jsx",
-                lineNumber: 55,
+                lineNumber: 52,
                 columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 53,
+        lineNumber: 50,
         columnNumber: 7
     }, undefined);
 };
-_s(MainView, "o71hQ+r+sSp2x+92wZKgDCclcq8=");
+_s(MainView, "ZONcipuE2Li7VJDb0yrKiHuBvNw=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
