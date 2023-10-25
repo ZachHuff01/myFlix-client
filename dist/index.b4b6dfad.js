@@ -27186,62 +27186,63 @@ var _movieView = require("../MovieView/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies1, setMovies] = (0, _react.useState)([]);
+    const [movie, setMovies] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
         fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
             console.log(data);
-            const moviesFromApi = data.map((movies1)=>{
+            const moviesFromApi = data.map((movie)=>{
                 return {
-                    _id: movies1._id,
-                    Title: movies1.Title,
+                    _id: movie._id,
+                    Title: movie.Title,
                     Image: "imagepath.png",
-                    Description: movies1.Description,
+                    Description: movie.Description,
+                    Genre: movie.Genre,
                     Genre: {
-                        Name: movies1.Genre.Name
+                        Name: movie.Genre.Name
                     },
                     Director: {
-                        Name: movies1.Director.Name
+                        Name: movie.Director.Name
                     }
                 };
             });
             setMovies(moviesFromApi);
         });
     }, []);
+    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        movie: selectedMovie,
+        onBackClick: ()=>setSelectedMovie(null)
+    }, void 0, false, {
+        fileName: "src/components/MainView/main-view.jsx",
+        lineNumber: 43,
+        columnNumber: 5
+    }, undefined);
+    if (movie.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "The list is empty!"
+    }, void 0, false, {
+        fileName: "src/components/MainView/main-view.jsx",
+        lineNumber: 49,
+        columnNumber: 12
+    }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: movie.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                movie: movie,
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
+                }
+            }, movie.id, false, {
+                fileName: "src/components/MainView/main-view.jsx",
+                lineNumber: 54,
+                columnNumber: 11
+            }, undefined))
+    }, void 0, false, {
+        fileName: "src/components/MainView/main-view.jsx",
+        lineNumber: 52,
+        columnNumber: 7
+    }, undefined);
 };
-_s(MainView, "MO6b3PSP3RIUqZ8gtSrBZBVtBbs=");
+_s(MainView, "4GVxqM/4csyfZaIJAfRPipvzJ5w=");
 _c = MainView;
-const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-    movie: selectedMovie,
-    onBackClick: ()=>setSelectedMovie(null)
-}, void 0, false, {
-    fileName: "src/components/MainView/main-view.jsx",
-    lineNumber: 41,
-    columnNumber: 5
-}, undefined);
-if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-    children: "The list is empty!"
-}, void 0, false, {
-    fileName: "src/components/MainView/main-view.jsx",
-    lineNumber: 47,
-    columnNumber: 12
-}, undefined);
-else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-    children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-            movie: movie,
-            onMovieClick: (newSelectedMovie)=>{
-                setSelectedMovie(newSelectedMovie);
-            }
-        }, movie.id, false, {
-            fileName: "src/components/MainView/main-view.jsx",
-            lineNumber: 52,
-            columnNumber: 11
-        }, undefined))
-}, void 0, false, {
-    fileName: "src/components/MainView/main-view.jsx",
-    lineNumber: 50,
-    columnNumber: 7
-}, undefined);
 var _c;
 $RefreshReg$(_c, "MainView");
 

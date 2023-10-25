@@ -5,24 +5,26 @@ import { MovieCard } from "../MovieCard/movie-card";
 import { MovieView } from "../MovieView/movie-view";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([]);
+  const [movie, setMovies] = useState([]);
 
   useEffect(() => {
     fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
         console.log (data);
-        const moviesFromApi = data.map((movies) => {
+        const moviesFromApi = data.map((movie) => {
           return {
-            _id: movies._id,
-            Title: movies.Title,
+            _id: movie._id,
+            Title: movie.Title,
             Image: 'imagepath.png',
-            Description: movies.Description,
+            Description: movie.Description,
+            Genre: movie.Genre,
+
             Genre: {
-                Name: movies.Genre.Name
+                Name: movie.Genre.Name
               },
             Director: {
-                Name: movies.Director.Name
+                Name: movie.Director.Name
               }
           };
         });
@@ -30,7 +32,7 @@ export const MainView = () => {
         setMovies(moviesFromApi);
       });
   }, []);
-};
+
 
 
 
@@ -43,12 +45,12 @@ const [selectedMovie, setSelectedMovie] = useState (null);
     );
   }
 
-  if (movies.length === 0) {
+  if (movie.length === 0) {
     return <div>The list is empty!</div>;
-  } else {
+  } 
     return (
       <div>
-        {movies.map((movie) => (
+        {movie.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}
