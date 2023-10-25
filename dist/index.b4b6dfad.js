@@ -27187,6 +27187,7 @@ var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
+    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
             console.log("movies from api", data);
@@ -27194,28 +27195,34 @@ const MainView = ()=>{
                 return {
                     Id: movies._id,
                     Title: movies.Title,
-                    Image: "imagepath.png",
+                    Image: movies.ImagePath,
                     Description: movies.Description,
-                    Genre: movies.Genre
+                    Genre: {
+                        Name: movies.Genre.Name,
+                        Description: movies.Genre.Description
+                    },
+                    Director: {
+                        Name: movies.Director.Name,
+                        Bio: movies.Director.Bio
+                    }
                 };
             });
             setMovies(moviesFromApi);
         });
     }, []);
-    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movies: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 37,
+        lineNumber: 46,
         columnNumber: 5
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 43,
+        lineNumber: 52,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27226,16 +27233,16 @@ const MainView = ()=>{
                 }
             }, movies._id, false, {
                 fileName: "src/components/MainView/main-view.jsx",
-                lineNumber: 48,
+                lineNumber: 57,
                 columnNumber: 11
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 46,
+        lineNumber: 55,
         columnNumber: 7
     }, undefined);
 };
-_s(MainView, "llzgrUkvR/+OoCNfiqlA1H2LLFI=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");

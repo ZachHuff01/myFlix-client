@@ -6,6 +6,7 @@ import { MovieView } from "../MovieView/movie-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState (null);
 
   useEffect(() => {
     fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies")
@@ -16,21 +17,29 @@ export const MainView = () => {
           return {
             Id: movies._id,
             Title: movies.Title,
-            Image: 'imagepath.png',
+            Image: movies.ImagePath,
             Description: movies.Description,
-            Genre: movies.Genre,
+            Genre: {
+              Name: movies.Genre.Name,
+              Description: movies.Genre.Description
+            },
+
+            Director: {
+              Name: movies.Director.Name,
+              Bio: movies.Director.Bio
+            }
 
           };
         });
 
         setMovies(moviesFromApi);
       });
+      try {
+        } catch (error) {
+        console.log(error)
+      };
   }, []);
 
-
-
-
-const [selectedMovie, setSelectedMovie] = useState (null);
 
   if (selectedMovie) {
     return (
