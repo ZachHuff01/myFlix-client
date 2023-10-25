@@ -5,55 +5,58 @@ import { MovieCard } from "../MovieCard/movie-card";
 import { MovieView } from "../MovieView/movie-view";
 
 export const MainView = () => {
-  const [movie, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState (null);
 
   useEffect(() => {
     fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        console.log (data);
-        const moviesFromApi = data.map((movie) => {
+        console.log ("movies from api", data);
+        const moviesFromApi = data.map((movies) => {
           return {
-            _id: movie._id,
-            Title: movie.Title,
-            Image: 'imagepath.png',
-            Description: movie.Description,
-            Genre: movie.Genre,
-
+            Id: movies._id,
+            Title: movies.Title,
+            Image: movies.ImagePath,
+            Description: movies.Description,
             Genre: {
-                Name: movie.Genre.Name
-              },
+              Name: movies.Genre.Name,
+              Description: movies.Genre.Description
+            },
+
             Director: {
-                Name: movie.Director.Name
-              }
+              Name: movies.Director.Name,
+              Bio: movies.Director.Bio
+            }
+
           };
         });
 
         setMovies(moviesFromApi);
       });
+      try {
+        } catch (error) {
+        console.log(error)
+      };
   }, []);
 
 
-
-
-const [selectedMovie, setSelectedMovie] = useState (null);
-
   if (selectedMovie) {
     return (
-    <MovieView movie={selectedMovie} onBackClick={()=>
+    <MovieView movies={selectedMovie} onBackClick={()=>
       setSelectedMovie(null)}/>
     );
   }
 
-  if (movie.length === 0) {
+  if (movies.length === 0) {
     return <div>The list is empty!</div>;
   } 
     return (
       <div>
-        {movie.map((movie) => (
+        {movies.map((movies) => (
           <MovieCard
-            key={movie.id}
-            movie={movie}
+            key={movies._id}
+            movies={movies}
             onMovieClick={(newSelectedMovie) => {
               setSelectedMovie(newSelectedMovie);
             }}
