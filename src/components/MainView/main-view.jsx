@@ -12,20 +12,14 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log ("movies from api", data);
-        const moviesFromApi = movies.map((movie) => {
+        const moviesFromApi = data.map((movies) => {
           return {
-            Id: movie._id,
-            Title: movie.Title,
+            Id: movies._id,
+            Title: movies.Title,
             Image: 'imagepath.png',
-            Description: movie.Description,
-            Genre: movie.Genre,
+            Description: movies.Description,
+            Genre: movies.Genre,
 
-            Genre: {
-                Name: movie.Genre.Name,
-              },
-            Director: {
-                Name: movie.Director.Name
-              }
           };
         });
 
@@ -52,8 +46,8 @@ const [selectedMovie, setSelectedMovie] = useState (null);
       <div>
         {movies.map((movies) => (
           <MovieCard
-            key={movies.id}
-            movie={movies}
+            key={movies._id}
+            movies={movies}
             onMovieClick={(newSelectedMovie) => {
               setSelectedMovie(newSelectedMovie);
             }}
