@@ -11,23 +11,30 @@ export const MainView = () => {
     fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
+        console.log (data);
+        const moviesFromApi = data.map((movies) => {
           return {
-            id: doc.key,
-            title: doc.title,
-            image:`https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-            description: doc.description,
-            director: doc.director_name?.[0],
-            genre: doc.genre_name?.[0]
+            _id: movies._id,
+            Title: movies.Title,
+            Image: 'imagepath.png',
+            Description: movies.Description,
+            Genre: {
+                Name: movies.Genre.Name
+              },
+            Director: {
+                Name: movies.Director.Name
+              }
           };
         });
 
         setMovies(moviesFromApi);
       });
   }, []);
-    
+};
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
+
+
+const [selectedMovie, setSelectedMovie] = useState (null);
 
   if (selectedMovie) {
     return (
@@ -52,5 +59,6 @@ export const MainView = () => {
         ))}
       </div>
     );
-  }
-};
+          };
+
+
