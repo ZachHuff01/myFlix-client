@@ -4,6 +4,7 @@ import { MovieCard } from "../MovieCard/movie-card";
 
 import { MovieView } from "../MovieView/movie-view";
 
+
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState (null);
@@ -12,21 +13,21 @@ export const MainView = () => {
     fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        console.log ("movies from api", data);
-        const moviesFromApi = data.map((movies) => {
+
+        const moviesFromApi = data.map((movie) => {
           return {
-            Id: movies._id,
-            Title: movies.Title,
-            Image: movies.ImagePath,
-            Description: movies.Description,
+            Id: movie._id,
+            Title: movie.Title,
+            Image: movie.ImagePath,
+            Description: movie.Description,
             Genre: {
-              Name: movies.Genre.Name,
-              Description: movies.Genre.Description
+              Name: movie.Genre.Name,
+              Description: movie.Genre.Description
             },
 
             Director: {
-              Name: movies.Director.Name,
-              Bio: movies.Director.Bio
+              Name: movie.Director.Name,
+              Bio: movie.Director.Bio
             }
 
           };
@@ -34,16 +35,13 @@ export const MainView = () => {
 
         setMovies(moviesFromApi);
       });
-      try {
-        } catch (error) {
-        console.log(error)
-      };
   }, []);
+
 
 
   if (selectedMovie) {
     return (
-    <MovieView movies={selectedMovie} onBackClick={()=>
+    <MovieView movie={selectedMovie} onBackClick={()=>
       setSelectedMovie(null)}/>
     );
   }
@@ -53,10 +51,10 @@ export const MainView = () => {
   } 
     return (
       <div>
-        {movies.map((movies) => (
+        {movies.map((movie) => (
           <MovieCard
-            key={movies._id}
-            movies={movies}
+            key={movie._id}
+            movie={movie}
             onMovieClick={(newSelectedMovie) => {
               setSelectedMovie(newSelectedMovie);
             }}
@@ -65,5 +63,8 @@ export const MainView = () => {
       </div>
     );
           };
+
+ export default MainView;
+
 
 
