@@ -27198,11 +27198,11 @@ const MainView = ()=>{
         if (!token) return;
         fetch("https://huff-movies-aa259f3af035.herokuapp.com/movies", {
             headers: {
-                Authorization: "Bearer ${token}"
+                Authorization: `Bearer ${token}`
             }
         }).then((response)=>response.json()).then((movies)=>{
             setMovies(movies);
-            const moviesFromApi = data.map((movie)=>{
+            const moviesFromApi = movies.map((movie)=>{
                 return {
                     Id: movie._id,
                     Title: movie.Title,
@@ -27233,7 +27233,7 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/MainView/main-view.jsx",
-                lineNumber: 56,
+                lineNumber: 54,
                 columnNumber: 9
             }, undefined),
             "or",
@@ -27250,47 +27250,49 @@ const MainView = ()=>{
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
         lineNumber: 69,
-        columnNumber: 5
+        columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 75,
+        lineNumber: 77,
         columnNumber: 12
     }, undefined);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                        movie: movie,
+                        onMovieClick: (newSelectedMovie)=>{
+                            setSelectedMovie(newSelectedMovie);
+                        }
+                    }, movie._id, false, {
+                        fileName: "src/components/MainView/main-view.jsx",
+                        lineNumber: 83,
+                        columnNumber: 11
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/MainView/main-view.jsx",
+                lineNumber: 81,
+                columnNumber: 7
+            }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: true,
-                ...()=>{
+                onClick: ()=>{
                     setUser(null);
                     setToken(null);
+                    localStorage.clear();
                 },
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/MainView/main-view.jsx",
-                lineNumber: 79,
-                columnNumber: 9
-            }, undefined),
-            movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                    movie: movie,
-                    onMovieClick: (newSelectedMovie)=>{
-                        setSelectedMovie(newSelectedMovie);
-                    }
-                }, movie._id, false, {
-                    fileName: "src/components/MainView/main-view.jsx",
-                    lineNumber: 85,
-                    columnNumber: 11
-                }, undefined))
+                lineNumber: 93,
+                columnNumber: 7
+            }, undefined)
         ]
-    }, void 0, true, {
-        fileName: "src/components/MainView/main-view.jsx",
-        lineNumber: 78,
-        columnNumber: 7
-    }, undefined);
+    }, void 0, true);
 };
-_s(MainView, "BlfpIHShIpB8l6l5+I0r6zS3Vck=");
+_s(MainView, "hFDxRpIbGxP6+QKMAcm8hX/Ql7A=");
 _c = MainView;
 exports.default = MainView;
 var _c;
@@ -27330,18 +27332,19 @@ const MovieCard = ({ movie, onMovieClick })=>{
         lineNumber: 7,
         columnNumber: 5
     }, undefined);
-}; // // Here is where we define all the props constraints for the BookCard
- // MovieCard.propTypes = {
- //   movies: PropTypes.shape({
- //     Title: PropTypes.string.isRequired,
- //     Image: PropTypes.string,
- //     Description: PropTypes.string,
- //     Director: PropTypes.string,
- //     Genre: PropTypes.string
- //   }).isRequired,
- //   onMovieClick: PropTypes.func.isRequired
- // };
+};
 _c = MovieCard;
+// // Here is where we define all the props constraints for the BookCard
+MovieCard.propTypes = {
+    movies: (0, _propTypesDefault.default).shape({
+        Title: (0, _propTypesDefault.default).string.isRequired,
+        Image: (0, _propTypesDefault.default).string,
+        Description: (0, _propTypesDefault.default).string,
+        Director: (0, _propTypesDefault.default).string,
+        Genre: (0, _propTypesDefault.default).string
+    }),
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieCard");
 
@@ -28470,8 +28473,8 @@ const LoginView = ({ onLoggedIn })=>{
         // this prevents the default behavior of the form which is to reload the entire page
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
         fetch("https://huff-movies-aa259f3af035.herokuapp.com/login", {
             method: "POST",
@@ -28490,42 +28493,6 @@ const LoginView = ({ onLoggedIn })=>{
             alert("Something went wrong");
         });
     };
-    // import { React } from "react";
-    // import { useState } from 'react';
-    // import  axios  from "axios";
-    //   async function fetchLogin(onLoggedIn, userData, setShowErrorMessage, setErrorMessage) {
-    //     axios
-    //       .post(`https://huff-movies-aa259f3af035.herokuapp.com/login`, {
-    //         Username: userData.Username,
-    //         Password: userData.Password,
-    //       })
-    //       .then((response) => {
-    //         localStorage.setItem('user', JSON.stringify(response.data.user));
-    //         localStorage.setItem('token', response.data.token);
-    //         onLoggedIn(response.data.user, response.data.token);
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //         setShowErrorMessage(true);
-    //         setErrorMessage('Username or Password was incorrect');
-    //       });
-    //   }
-    //   export default function LoginView({ onLoggedIn }) {
-    //     const [username, setUsername] = useState('');
-    //     const [password, setPassword] = useState('');
-    //     const handleSubmit = (event) => {
-    //       event.preventDefault();
-    //       if (username === '' || password === '') {
-    //         setShowErrorMessage(true);
-    //         setErrorMessage('Please fill in all required* fields');
-    //         return;
-    //       }
-    //       const userData = {
-    //         Username: username,
-    //         Password: password,
-    //       };
-    //       fetchLogin(onLoggedIn, userData, setShowErrorMessage, setErrorMessage);
-    //     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
         onSubmit: handleSubmit,
         children: [
@@ -28542,13 +28509,13 @@ const LoginView = ({ onLoggedIn })=>{
                         maxLength: "15"
                     }, void 0, false, {
                         fileName: "src/components/LoginView/login-view.jsx",
-                        lineNumber: 87,
+                        lineNumber: 44,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/LoginView/login-view.jsx",
-                lineNumber: 85,
+                lineNumber: 42,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28564,13 +28531,13 @@ const LoginView = ({ onLoggedIn })=>{
                         maxLength: "15"
                     }, void 0, false, {
                         fileName: "src/components/LoginView/login-view.jsx",
-                        lineNumber: 98,
+                        lineNumber: 56,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/LoginView/login-view.jsx",
-                lineNumber: 96,
+                lineNumber: 54,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28578,17 +28545,17 @@ const LoginView = ({ onLoggedIn })=>{
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/LoginView/login-view.jsx",
-                lineNumber: 109,
+                lineNumber: 66,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/LoginView/login-view.jsx",
-        lineNumber: 84,
+        lineNumber: 41,
         columnNumber: 5
     }, undefined);
 };
-_s(LoginView, "Lrw7JeD9zj6OUWhT/IH4OIvPKEk=");
+_s(LoginView, "wuQOK7xaXdVz4RMrZQhWbI751Oc=");
 _c = LoginView;
 var _c;
 $RefreshReg$(_c, "LoginView");
