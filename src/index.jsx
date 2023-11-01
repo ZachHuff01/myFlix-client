@@ -19,15 +19,16 @@
 // // Tells React to render your app in the root DOM element
 // root.render(<MyFlixApplication />);
 
-import { createRoot } from "react-dom/client";
-import { MainView } from "./components/MainView/main-view";
+import { createRoot } from 'react-dom/client';
+import { MainView } from './components/MainView/main-view';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./index.scss";
+import './index.scss';
 
 const App = () => {
   return <MainView />;
 };
 
-const container = document.querySelector("#root");
+const container = document.querySelector('#root');
 const root = createRoot(container);
 root.render(<App />);
