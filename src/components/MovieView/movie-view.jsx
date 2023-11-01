@@ -1,4 +1,6 @@
-export const MovieView = ({ movie, onBackClick}) => {
+import './movie-view.scss';
+
+export const MovieView = ({ movie, onBackClick }) => {
   console.log(movie);
   return (
     <div>
@@ -18,7 +20,7 @@ export const MovieView = ({ movie, onBackClick}) => {
         <span>{movie.Director.Name}</span>
       </div>
       <div>
-      <span>Director Bio:</span>
+        <span>Director Bio:</span>
         <span>{movie.Director.Bio}</span>
       </div>
       <div>
@@ -29,7 +31,13 @@ export const MovieView = ({ movie, onBackClick}) => {
         <span>Genre Description:</span>
         <span>{movie.Genre.Description}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <button
+        onClick={onBackClick}
+        classname='back-button'
+        style={{ cursor: 'pointer' }}
+      >
+        Back
+      </button>
     </div>
   );
 };
