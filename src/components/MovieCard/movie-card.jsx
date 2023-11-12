@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 
 export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  console.log(user);
 
   useEffect(() => {
     // Check if user and user.favoriteMovies are defined

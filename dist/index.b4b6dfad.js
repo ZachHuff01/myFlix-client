@@ -27485,7 +27485,6 @@ var _s = $RefreshSig$();
 const MovieCard = ({ movie, token, setUser, user })=>{
     _s();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
-    console.log(user);
     (0, _react.useEffect)(()=>{
         // Check if user and user.favoriteMovies are defined
         if (user && user.favoriteMovies) {
@@ -27561,7 +27560,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                 src: movie.Image
             }, void 0, false, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 101,
+                lineNumber: 100,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27570,14 +27569,14 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 104,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Description
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 105,
+                        lineNumber: 104,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27587,12 +27586,12 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 107,
+                            lineNumber: 106,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 106,
+                        lineNumber: 105,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27603,7 +27602,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 112,
+                            lineNumber: 111,
                             columnNumber: 13
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
@@ -27611,24 +27610,24 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "-"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 116,
+                            lineNumber: 115,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 110,
+                        lineNumber: 109,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 103,
+                lineNumber: 102,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/MovieCard/movie-card.jsx",
-        lineNumber: 100,
+        lineNumber: 99,
         columnNumber: 5
     }, undefined);
 };
