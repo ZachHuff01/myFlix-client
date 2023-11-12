@@ -10,14 +10,41 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   console.log(user);
 
   useEffect(() => {
-    if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
-      setIsFavorite(true);
+    // Check if user and user.favoriteMovies are defined
+    if (user && user.favoriteMovies) {
+      // Check if movie._id is defined
+      if (movie && movie._id) {
+        if (user.favoriteMovies.includes(movie._id)) {
+          setIsFavorite(true);
+        }
+      } else {
+        console.error('Movie or movie._id is not defined.');
+      }
+
+      // Filter movies with error handling
+      let favoriteMovies;
+      if (Array.isArray(movie) && Array.isArray(user.favoriteMovies)) {
+        favoriteMovies = movie.filter((movieItem) =>
+          user.favoriteMovies.includes(movieItem._id)
+        );
+      } else {
+        console.error('Movie or user.FavoriteMovies is not an array.');
+      }
+
+      console.log(favoriteMovies);
+    } else {
+      console.error('User or user.favoriteMovies is not defined.');
     }
-    let favoriteMovies = movie.filter((movie) =>
-      user.FavoriteMovies.includes(movie._id)
-    );
-    console.log(favoriteMovies);
-  }, [setUser]);
+  }, [user, movie, setUser]);
+  // useEffect(() => {
+  //   if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+  //     setIsFavorite(true);
+  //   }
+  //   let favoriteMovies = movie.filter((movie) =>
+  //     user.FavoriteMovies.includes(movie._id)
+  //   );
+  //   console.log(favoriteMovies);
+  // }, [setUser]);
 
   const addFavoriteMovie = () => {
     fetch(

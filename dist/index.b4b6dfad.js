@@ -27487,12 +27487,32 @@ const MovieCard = ({ movie, token, setUser, user })=>{
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
     console.log(user);
     (0, _react.useEffect)(()=>{
-        if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
-        let favoriteMovies = movie.filter((movie)=>user.FavoriteMovies.includes(movie._id));
-        console.log(favoriteMovies);
+        // Check if user and user.favoriteMovies are defined
+        if (user && user.favoriteMovies) {
+            // Check if movie._id is defined
+            if (movie && movie._id) {
+                if (user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
+            } else console.error("Movie or movie._id is not defined.");
+            // Filter movies with error handling
+            let favoriteMovies;
+            if (Array.isArray(movie) && Array.isArray(user.favoriteMovies)) favoriteMovies = movie.filter((movieItem)=>user.favoriteMovies.includes(movieItem._id));
+            else console.error("Movie or user.FavoriteMovies is not an array.");
+            console.log(favoriteMovies);
+        } else console.error("User or user.favoriteMovies is not defined.");
     }, [
+        user,
+        movie,
         setUser
     ]);
+    // useEffect(() => {
+    //   if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
+    //     setIsFavorite(true);
+    //   }
+    //   let favoriteMovies = movie.filter((movie) =>
+    //     user.FavoriteMovies.includes(movie._id)
+    //   );
+    //   console.log(favoriteMovies);
+    // }, [setUser]);
     const addFavoriteMovie = ()=>{
         fetch(`https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
             method: "POST",
@@ -27541,7 +27561,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                 src: movie.Image
             }, void 0, false, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 74,
+                lineNumber: 101,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27550,14 +27570,14 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 77,
+                        lineNumber: 104,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Description
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 78,
+                        lineNumber: 105,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27567,12 +27587,12 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 80,
+                            lineNumber: 107,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 79,
+                        lineNumber: 106,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27583,7 +27603,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 85,
+                            lineNumber: 112,
                             columnNumber: 13
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
@@ -27591,24 +27611,24 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "-"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 89,
+                            lineNumber: 116,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 83,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 76,
+                lineNumber: 103,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/MovieCard/movie-card.jsx",
-        lineNumber: 73,
+        lineNumber: 100,
         columnNumber: 5
     }, undefined);
 };
