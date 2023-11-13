@@ -27324,7 +27324,8 @@ const MainView = ()=>{
                                             classname: "mb-4",
                                             md: 3,
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                movie: movie
+                                                movie: movie,
+                                                user: user
                                             }, void 0, false, void 0, void 0)
                                         }, movie._id, false, void 0, void 0))
                                 }, void 0, false)
@@ -27487,16 +27488,16 @@ const MovieCard = ({ movie, token, setUser, user })=>{
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         // Check if user and user.favoriteMovies are defined
-        if (user && user.favoriteMovies) {
+        if (user && user.FavoriteMovies) {
             // Check if movie._id is defined
             if (movie && movie._id) {
-                if (user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
+                if (user.FavoriteMovies.includes(movie._id)) setIsFavorite(true);
             } else console.error("Movie or movie._id is not defined.");
             // Filter movies with error handling
-            let favoriteMovies;
-            if (Array.isArray(movie) && Array.isArray(user.favoriteMovies)) favoriteMovies = movie.filter((movieItem)=>user.favoriteMovies.includes(movieItem._id));
+            let FavoriteMovies;
+            if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) FavoriteMovies = movie.filter((movie)=>user.FavoriteMovies.includes(movie._id));
             else console.error("Movie or user.FavoriteMovies is not an array.");
-            console.log(favoriteMovies);
+            console.log(FavoriteMovies);
         } else console.error("User or user.favoriteMovies is not defined.");
     }, [
         user,
@@ -44039,11 +44040,20 @@ const NavigationBar = ({ user, onLoggedOut })=>{
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                        as: (0, _reactRouterDom.Link),
+                                        to: "/profile",
+                                        children: "My Profile"
+                                    }, void 0, false, {
+                                        fileName: "src/components/NavigationBar/navigation-bar.jsx",
+                                        lineNumber: 29,
+                                        columnNumber: 17
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
                                         onClick: onLoggedOut,
                                         children: "Logout"
                                     }, void 0, false, {
                                         fileName: "src/components/NavigationBar/navigation-bar.jsx",
-                                        lineNumber: 29,
+                                        lineNumber: 32,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
@@ -44097,18 +44107,18 @@ var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const ProfileView = ({ user, token, movies, setUser })=>{
     _s();
-    const [name, setName] = (0, _react.useState)(user.name);
-    const [password, setPassword] = (0, _react.useState)(user.password);
-    const [email, setEmail] = (0, _react.useState)(user.email);
-    const [birthday, setBirthday] = (0, _react.useState)(user.birthday);
+    const [Username, setName] = (0, _react.useState)(user.Username);
+    const [Password, setPassword] = (0, _react.useState)(user.Password);
+    const [Email, setEmail] = (0, _react.useState)(user.Email);
+    const [Birthday, setBirthday] = (0, _react.useState)(user.Birthday);
     const favMov = user.FavoriteMovies ? movies.filter((movie)=>user.FavoriteMovies.includes(movie._id)) : [];
     const handleUpdate = (event)=>{
         event.preventDefault();
         const data = {
-            Name: name,
-            Password: password,
-            Email: email,
-            Birthday: birthday
+            Username: Username,
+            Password: Password,
+            Email: Email,
+            Birthday: Birthday
         };
         fetch(`https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}`, {
             method: "PUT",
@@ -44215,7 +44225,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "text",
-                                            value: name,
+                                            value: Username,
                                             onChange: (e)=>setName(e.target.value),
                                             required: true
                                         }, void 0, false, {
@@ -44242,7 +44252,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "password",
-                                            value: password,
+                                            value: Password,
                                             onChange: (e)=>setPassword(e.target.value),
                                             required: true
                                         }, void 0, false, {
@@ -44269,7 +44279,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "email",
-                                            value: email,
+                                            value: Email,
                                             onChange: (e)=>setEmail(e.target.value),
                                             required: true
                                         }, void 0, false, {
@@ -44295,7 +44305,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "date",
-                                            value: birthday,
+                                            value: Birthday,
                                             onChange: (e)=>setBirthday(e.target.value),
                                             required: true
                                         }, void 0, false, {
@@ -44352,7 +44362,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
         columnNumber: 5
     }, undefined);
 };
-_s(ProfileView, "6D1pHNgfYtazAc7gEH8cLBs+hgQ=");
+_s(ProfileView, "/DU+5igAN11kbDJlSBkeq2021mI=");
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");

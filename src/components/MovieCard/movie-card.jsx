@@ -10,10 +10,10 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   useEffect(() => {
     // Check if user and user.favoriteMovies are defined
-    if (user && user.favoriteMovies) {
+    if (user && user.FavoriteMovies) {
       // Check if movie._id is defined
       if (movie && movie._id) {
-        if (user.favoriteMovies.includes(movie._id)) {
+        if (user.FavoriteMovies.includes(movie._id)) {
           setIsFavorite(true);
         }
       } else {
@@ -21,16 +21,16 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
       }
 
       // Filter movies with error handling
-      let favoriteMovies;
-      if (Array.isArray(movie) && Array.isArray(user.favoriteMovies)) {
-        favoriteMovies = movie.filter((movieItem) =>
-          user.favoriteMovies.includes(movieItem._id)
+      let FavoriteMovies;
+      if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) {
+        FavoriteMovies = movie.filter((movie) =>
+          user.FavoriteMovies.includes(movie._id)
         );
       } else {
         console.error('Movie or user.FavoriteMovies is not an array.');
       }
 
-      console.log(favoriteMovies);
+      console.log(FavoriteMovies);
     } else {
       console.error('User or user.favoriteMovies is not defined.');
     }

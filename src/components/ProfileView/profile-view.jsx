@@ -3,10 +3,10 @@ import { MovieCard } from '../MovieCard/movie-card';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 export const ProfileView = ({ user, token, movies, setUser }) => {
-  const [name, setName] = useState(user.name);
-  const [password, setPassword] = useState(user.password);
-  const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
+  const [Username, setName] = useState(user.Username);
+  const [Password, setPassword] = useState(user.Password);
+  const [Email, setEmail] = useState(user.Email);
+  const [Birthday, setBirthday] = useState(user.Birthday);
 
   const favMov = user.FavoriteMovies
     ? movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
@@ -16,10 +16,10 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     event.preventDefault();
 
     const data = {
-      Name: name,
-      Password: password,
-      Email: email,
-      Birthday: birthday,
+      Username: Username,
+      Password: Password,
+      Email: Email,
+      Birthday: Birthday,
     };
 
     fetch(
@@ -97,7 +97,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
               <Form.Label>Name:</Form.Label>
               <Form.Control
                 type='text'
-                value={name}
+                value={Username}
                 onChange={(e) => setName(e.target.value)}
                 required
               />
@@ -106,7 +106,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
               <Form.Label>Password:</Form.Label>
               <Form.Control
                 type='password'
-                value={password}
+                value={Password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
@@ -115,7 +115,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
               <Form.Label>Email:</Form.Label>
               <Form.Control
                 type='email'
-                value={email}
+                value={Email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
@@ -124,7 +124,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
               <Form.Label>Birthday:</Form.Label>
               <Form.Control
                 type='date'
-                value={birthday}
+                value={Birthday}
                 onChange={(e) => setBirthday(e.target.value)}
                 required
               />
