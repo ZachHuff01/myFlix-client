@@ -8,46 +8,42 @@ import { useEffect, useState } from 'react';
 export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  useEffect(() => {
-    // Check if user and user.favoriteMovies are defined
-    if (user && user.FavoriteMovies) {
-      // Check if movie._id is defined
-      if (movie && movie._id) {
-        if (user.FavoriteMovies.includes(movie._id)) {
-          setIsFavorite(true);
-        }
-      } else {
-        console.error('Movie or movie._id is not defined.');
-      }
-
-      // Filter movies with error handling
-      let FavoriteMovies;
-      if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) {
-        FavoriteMovies = movie.filter((movie) =>
-          user.FavoriteMovies.includes(movie._id)
-        );
-      } else {
-        console.error('Movie or user.FavoriteMovies is not an array.');
-      }
-
-      console.log(FavoriteMovies);
-    } else {
-      console.error('User or user.favoriteMovies is not defined.');
-    }
-  }, [user, movie, setUser]);
   // useEffect(() => {
-  //   if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
-  //     setIsFavorite(true);
+  //   // Check if user and user.favoriteMovies are defined
+  //   if (user && user.FavoriteMovies) {
+  //     // Check if movie._id is defined
+  //     if (movie && movie._id) {
+  //       if (user.FavoriteMovies.includes(movie)) {
+  //         setIsFavorite(true);
+  //       }
+  //     } else {
+  //       console.error('Movie or movie._id is not defined.');
+  //     }
+
+  // Filter movies with error handling
+  //     let FavoriteMovies;
+  //     if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) {
+  //       FavoriteMovies = movie.filter((movie) =>
+  //         user.FavoriteMovies.includes(movie)
+  //       );
+  //     } else {
+  //       console.error('Movie or user.FavoriteMovies is not an array.');
+  //     }
+
+  //     console.log(FavoriteMovies);
+  //   } else {
+  //     console.error('User or user.favoriteMovies is not defined.');
   //   }
-  //   let favoriteMovies = movie.filter((movie) =>
-  //     user.FavoriteMovies.includes(movie._id)
-  //   );
-  //   console.log(favoriteMovies);
-  // }, [setUser]);
+  // }, [user, movie, setUser]);
+  useEffect(() => {
+    if (user.favoriteMovies && user.favoriteMovies.includes(movie.Id)) {
+      setIsFavorite(true);
+    }
+  }, [user]);
 
   const addFavoriteMovie = () => {
     fetch(
-      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`,
       { method: 'POST', headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -72,7 +68,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`,
       { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -96,13 +92,13 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   };
 
   return (
-    <Card className='shadow p-4 border-0 h-100'>
-      <Card.Img className='m-2' src={movie.Image} />
+    <Card className='p-1 border-0 h-100'>
+      <Card.Img className='m-3' src={movie.Image} />
 
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+        <Link to={`/movies/${encodeURIComponent(movie.Id)}`}>
           <Button className='close-open-btn'>Open</Button>
         </Link>
 

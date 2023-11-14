@@ -6,7 +6,7 @@ export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   const movie = movies.find((movie) => movie._id === movieId);
 
-  console.log(movieId);
+  console.log(movie.Id);
 
   return (
     <div>
