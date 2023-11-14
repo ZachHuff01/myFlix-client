@@ -96,7 +96,7 @@ export const MainView = () => {
           />
 
           <Route
-            path='/movies/:movie_id'
+            path='/movies/:movieID'
             element={
               <>
                 {!user ? (
@@ -123,7 +123,7 @@ export const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col classname='mb-4' key={movie._id} md={3}>
+                      <Col classname='mb-4' key={movie.Id} md={3}>
                         <MovieCard movie={movie} user={user} />
                       </Col>
                     ))}
