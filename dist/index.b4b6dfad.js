@@ -27385,79 +27385,6 @@ _c = MainView;
 exports.default = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
- //   return (
- //     <BrowserRouter>
- //       <Row className="justify-content-md-center">
- //         <Routes>
- //           <Route
- //             path="/signup"
- //             element={
- //               <>
- //                 {user ? (
- //                   <Navigate to="/" />
- //                 ) : (
- //                   <Col md={5}>
- //                     <SignupView />
- //                   </Col>
- //                 )}
- //               </>
- //             }
- //           />
- //           <Route
- //             path="/login"
- //             element={
- //               <>
- //                 {user ? (
- //                   <Navigate to="/" />
- //                 ) : (
- //                   <Col md={5}>
- //                     <LoginView onLoggedIn={(user) => setUser(user)} />
- //                   </Col>
- //                 )}
- //               </>
- //             }
- //           />
- //           <Route
- //             path="/books/:bookId"
- //             element={
- //               <>
- //                 {!user ? (
- //                   <Navigate to="/login" replace />
- //                 ) : books.length === 0 ? (
- //                   <Col>The list is empty!</Col>
- //                 ) : (
- //                   <Col md={8}>
- //                     <BookView books={books} />
- //                   </Col>
- //                 )}
- //               </>
- //             }
- //           />
- //           <Route
- //             path="/"
- //             element={
- //               <>
- //                 {!user ? (
- //                   <Navigate to="/login" replace />
- //                 ) : books.length === 0 ? (
- //                   <Col>The list is empty!</Col>
- //                 ) : (
- //                   <>
- //                     {books.map((book) => (
- //                       <Col className="mb-4" key={book.id} md={3}>
- //                         <BookCard book={book} />
- //                       </Col>
- //                     ))}
- //                   </>
- //                 )}
- //               </>
- //             }
- //           />
- //         </Routes>
- //       </Row>
- //     </BrowserRouter>
- //   );
- // };
 
   $parcel$ReactRefreshHelpers$0362.postlude(module);
 } finally {
@@ -27487,37 +27414,25 @@ const MovieCard = ({ movie, token, setUser, user })=>{
     _s();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        // Check if user and user.favoriteMovies are defined
-        if (user && user.FavoriteMovies) {
-            // Check if movie._id is defined
-            if (movie && movie.Id) {
-                if (user.FavoriteMovies.includes(movie)) setIsFavorite(true);
-            } else console.error("Movie or movie._id is not defined.");
-            // Filter movies with error handling
-            let FavoriteMovies;
-            if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) FavoriteMovies = movie.filter((movie)=>user.FavoriteMovies.includes(movie));
-            else console.error("Movie or user.FavoriteMovies is not an array.");
-            console.log(FavoriteMovies);
-        } else console.error("User or user.favoriteMovies is not defined.");
+        if (user && user.FavoriteMovies && user.FavoriteMovies.includes(movie.Id)) setIsFavorite(true);
+        else setIsFavorite(false);
     }, [
         user,
-        movie,
-        setUser
-    ]);
-    (0, _react.useEffect)(()=>{
-        if (user.FavoriteMovies && user.FavoriteMovies.includes(movie.Id)) setIsFavorite(true);
-    }, [
-        user
+        movie.Id
     ]);
     const addFavorite = ()=>{
         fetch(`https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`, {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`,
+                "Content-Type": "application/json"
             }
         }).then((response)=>{
             if (response.ok) return response.json();
-            else console.log("Failed to add fav movie");
+            else {
+                alert("Failed to add fav movie");
+                console.log("Failed to add fav movie");
+            }
         }).then((user)=>{
             if (user) {
                 alert("successfully added to favorites");
@@ -27557,7 +27472,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                 src: movie.Image
             }, void 0, false, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 97,
+                lineNumber: 78,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27566,14 +27481,14 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 100,
+                        lineNumber: 81,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Description
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 101,
+                        lineNumber: 82,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27583,12 +27498,12 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 103,
+                            lineNumber: 84,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 102,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27599,7 +27514,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 108,
+                            lineNumber: 89,
                             columnNumber: 13
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                             className: "fav-btn",
@@ -27607,28 +27522,28 @@ const MovieCard = ({ movie, token, setUser, user })=>{
                             children: "-"
                         }, void 0, false, {
                             fileName: "src/components/MovieCard/movie-card.jsx",
-                            lineNumber: 112,
+                            lineNumber: 93,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/MovieCard/movie-card.jsx",
-                        lineNumber: 106,
+                        lineNumber: 87,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/MovieCard/movie-card.jsx",
-                lineNumber: 99,
+                lineNumber: 80,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/MovieCard/movie-card.jsx",
-        lineNumber: 96,
+        lineNumber: 77,
         columnNumber: 5
     }, undefined);
 };
-_s(MovieCard, "Dg9pRo1hkiLmdRxo8bYfvQYbgn8=");
+_s(MovieCard, "lh6fxD9+vLbuebOO0x4Y5WwBqk4=");
 _c = MovieCard;
 // // Here is where we define all the props constraints for the Movie-Card
 MovieCard.propTypes = {
@@ -27639,7 +27554,7 @@ MovieCard.propTypes = {
         Director: (0, _propTypesDefault.default).string,
         Genre: (0, _propTypesDefault.default).string
     })
-}; // };
+};
 var _c;
 $RefreshReg$(_c, "MovieCard");
 
