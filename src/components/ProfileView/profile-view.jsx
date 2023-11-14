@@ -9,7 +9,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
   const [Birthday, setBirthday] = useState(user.Birthday);
 
   const favMov = user.FavoriteMovies
-    ? movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
+    ? movies.filter((movie) => user.FavoriteMovies.includes(movie.Id))
     : [];
 
   const handleUpdate = (event) => {
@@ -77,7 +77,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         <h2 className='profile-title'>Favorite movies</h2>
         {favMov.map((movie) => {
           return (
-            <Col key={movie._id} className='m-3'>
+            <Col key={movie.Id} className='m-3'>
               <MovieCard
                 movie={movie}
                 token={token}
