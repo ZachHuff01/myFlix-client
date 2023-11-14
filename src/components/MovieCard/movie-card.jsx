@@ -9,48 +9,29 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    // Check if user and user.favoriteMovies are defined
-    if (user && user.FavoriteMovies) {
-      // Check if movie._id is defined
-      if (movie && movie.Id) {
-        if (user.FavoriteMovies.includes(movie)) {
-          setIsFavorite(true);
-        }
-      } else {
-        console.error('Movie or movie._id is not defined.');
-      }
-
-      // Filter movies with error handling
-      let FavoriteMovies;
-      if (Array.isArray(movie) && Array.isArray(user.FavoriteMovies)) {
-        FavoriteMovies = movie.filter((movie) =>
-          user.FavoriteMovies.includes(movie)
-        );
-      } else {
-        console.error('Movie or user.FavoriteMovies is not an array.');
-      }
-
-      console.log(FavoriteMovies);
-    } else {
-      console.error('User or user.favoriteMovies is not defined.');
-    }
-  }, [user, movie, setUser]);
-
-  useEffect(() => {
-    if (user.FavoriteMovies && user.FavoriteMovies.includes(movie.Id)) {
+    if (user && user.FavoriteMovies && user.FavoriteMovies.includes(movie.Id)) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
-  }, [user]);
+  }, [user, movie.Id]);
 
   const addFavorite = () => {
     fetch(
       `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`,
-      { method: 'POST', headers: { Authorization: `Bearer ${token}` } }
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'application/json',
+        },
+      }
     )
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
+          alert('Failed to add fav movie');
           console.log('Failed to add fav movie');
         }
       })
@@ -129,4 +110,3 @@ MovieCard.propTypes = {
     Genre: PropTypes.string,
   }),
 };
-// };
