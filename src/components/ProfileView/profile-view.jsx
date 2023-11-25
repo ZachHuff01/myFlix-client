@@ -9,7 +9,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
   const [Birthday, setBirthday] = useState(user.Birthday);
 
   const favMov = user.FavoriteMovies
-    ? movies.filter((movie) => user.FavoriteMovies.includes(movie.Id))
+    ? movies.filter((movie) => user.FavoriteMovies.includes(movie._id))
     : [];
 
   const handleUpdate = (event) => {
