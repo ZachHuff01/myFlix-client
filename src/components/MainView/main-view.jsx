@@ -27,25 +27,25 @@ export const MainView = () => {
       .then((movies) => {
         setMovies(movies);
 
-        const moviesFromApi = movies.map((movie) => {
-          return {
-            Id: movie._id,
-            Title: movie.Title,
-            Image: movie.ImagePath,
-            Description: movie.Description,
-            Genre: {
-              Name: movie.Genre.Name,
-              Description: movie.Genre.Description,
-            },
+        // const moviesFromApi = movies.map((movie) => {
+        //   return {
+        //     Id: movie._id,
+        //     Title: movie.Title,
+        //     Image: movie.ImagePath,
+        //     Description: movie.Description,
+        //     Genre: {
+        //       Name: movie.Genre.Name,
+        //       Description: movie.Genre.Description,
+        //     },
 
-            Director: {
-              Name: movie.Director.Name,
-              Bio: movie.Director.Bio,
-            },
-          };
-        });
+        //     Director: {
+        //       Name: movie.Director.Name,
+        //       Bio: movie.Director.Bio,
+        //     },
+        //   };
+        // });
 
-        setMovies(moviesFromApi);
+        // setMovies(moviesFromApi);
       });
   }, [token]);
 
@@ -96,7 +96,7 @@ export const MainView = () => {
           />
 
           <Route
-            path='/movies/:movieID'
+            path='/movies/:MovieID'
             element={
               <>
                 {!user ? (
@@ -123,8 +123,13 @@ export const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col classname='mb-4' key={movie.Id} md={3}>
-                        <MovieCard movie={movie} user={user} />
+                      <Col classname='mb-4' key={movie._id} md={3}>
+                        <MovieCard
+                          movie={movie}
+                          user={user}
+                          setUser={setUser}
+                          token={token}
+                        />
                       </Col>
                     ))}
                   </>

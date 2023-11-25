@@ -9,23 +9,21 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    if (user && user.FavoriteMovies && user.FavoriteMovies.includes(movie.Id)) {
+    if (
+      user &&
+      user.FavoriteMovies &&
+      user.FavoriteMovies.includes(movie._id)
+    ) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
     }
-  }, [user, movie.Id]);
+  }, [user, movie._id]);
 
   const addFavorite = () => {
     fetch(
-      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          'Content-Type': 'application/json',
-        },
-      }
+      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
+      { method: 'POST', headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
         if (response.ok) {
@@ -50,7 +48,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   const removeFavorite = () => {
     fetch(
-      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie.Id}`,
+      `https://huff-movies-aa259f3af035.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
       { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -75,12 +73,12 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 
   return (
     <Card className='p-1 border-0 h-100'>
-      <Card.Img className='m-3' src={movie.Image} />
+      <Card.Img className='m-3' src={movie.ImagePath} />
 
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie.Id)}`}>
+        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
           <Button className='close-open-btn'>Open</Button>
         </Link>
 

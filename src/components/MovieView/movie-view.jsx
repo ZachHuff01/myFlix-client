@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import './movie-view.scss';
 
 export const MovieView = ({ movies }) => {
-  const { movieId } = useParams();
-  const movie = movies.find((movie) => movie._id === movieId);
+  const { MovieID } = useParams();
+  const movie = movies.find((movie) => movie._id === MovieID);
 
-  console.log(movie.Id);
+  console.log(MovieID);
 
   return (
     <div>
       <div>
-        <img className='w-100' src={movie.Image} />
+        <img className='w-100' src={movie.ImagePath} />
       </div>
       <div>
         <span>Title: </span>
