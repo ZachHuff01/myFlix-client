@@ -1,8 +1,9 @@
-[Welcome to MyFlix App](https://huff-myflix.netlify.app/)
+# Welcome to MyFlix App
+
 
 ## Overview-
 
-  This application is a simple example of a frontend development project interacting with a backend API. The API was created using data from movies that I found interesting. 
+  This application is a simple example of a frontend development project interacting with a backend API. The API was created using data from movies that I found interesting. If you'd like to check it out click here [MyFlix App](https://huff-myflix.netlify.app/)
 
 
 ## View & Features 
