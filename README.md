@@ -1,5 +1,19 @@
-MYFLIX-CLIENT 
-This is the client side of the movie_api 
-The client side of this project will be using the Javascript framework, React. 
-Im not sure how this will operate at the moment but i will update this README once i have a better understanding of the operations. 
- 
+Welcome to Myflix App 
+
+Overview-
+  This application is a simple example of a frontend development project interacting with a backend API. The API was created using data from movies that I found interesting. 
+
+
+Features-
+  create your own profile 
+  View a list of movies  
+  add movies to a list of favorites 
+  remove movies to a list of favorites 
+  filter movies by genre
+  update user data
+  delete profile entirely 
+
+
+Tech Stack-
+  The tech stack used in this application is the MERN stack. (MongoDB, Express, React, Node)
+
