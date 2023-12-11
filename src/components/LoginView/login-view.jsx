@@ -1,4 +1,5 @@
 import { React } from 'react';
+import '../LoginView/login-view.scss';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -40,34 +41,36 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId='formUsername'>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type='text'
-          id='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength='6'
-          maxLength='15'
-        />
-      </Form.Group>
-      <Form.Group controlId='formPassword'>
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          minLength='5'
-          maxLength='15'
-        />
-      </Form.Group>
-      <Button variant='primary' type='submit'>
-        Submit
-      </Button>
-    </Form>
+    <div className='login-view'>
+      <Form className='login-container' onSubmit={handleSubmit}>
+        <Form.Group controlId='formUsername'>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type='text'
+            id='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            minLength='6'
+            maxLength='15'
+          />
+        </Form.Group>
+        <Form.Group controlId='formPassword'>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type='password'
+            id='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            minLength='5'
+            maxLength='15'
+          />
+        </Form.Group>
+        <Button variant='primary' type='submit'>
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 };

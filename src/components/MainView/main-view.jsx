@@ -1,3 +1,4 @@
+import { React } from 'react';
 import { useState, useEffect } from 'react';
 import { MovieCard } from '../MovieCard/movie-card';
 import { MovieView } from '../MovieView/movie-view';
@@ -5,6 +6,7 @@ import { LoginView } from '../LoginView/login-view';
 import { SignupView } from '../SignUpView/signup-view';
 import { NavigationBar } from '../NavigationBar/navigation-bar';
 import { ProfileView } from '../ProfileView/profile-view';
+import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Dropdown } from 'react-bootstrap';
@@ -15,6 +17,7 @@ export const MainView = () => {
   const storedToken = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
   const [genreFilter, setGenreFilter] = useState(null);
+  const [titleFilter, setTitleFilter] = useState('');
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
@@ -26,12 +29,16 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-        const filteredMovies = genreFilter
-          ? movies.filter((movie) => movie.Genre.Name === genreFilter)
-          : movies;
+        const filteredMovies = movies.filter(
+          (movie) =>
+            (!genreFilter || movie.Genre.Name === genreFilter) &&
+            (!titleFilter ||
+              movie.Title.toLowerCase().includes(titleFilter.toLowerCase()))
+        );
+
         setMovies(filteredMovies);
       });
-  }, [token, genreFilter]);
+  }, [token, genreFilter, titleFilter]);
 
   return (
     <BrowserRouter>
@@ -44,6 +51,15 @@ export const MainView = () => {
       />
 
       <Row className='justify-content-md-center'>
+        <Form.Group controlId='titleFilterInput'>
+          <Form.Control
+            type='text'
+            placeholder='Search by Title'
+            value={titleFilter}
+            onChange={(e) => setTitleFilter(e.target.value)}
+          />
+        </Form.Group>
+
         <Dropdown>
           <Dropdown.Toggle variant='primary' id='genreFilterDropdown'>
             Filter by Genre
@@ -69,6 +85,7 @@ export const MainView = () => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+
         <Routes>
           <Route
             path='/login'
