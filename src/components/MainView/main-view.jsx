@@ -7,13 +7,14 @@ import { NavigationBar } from '../NavigationBar/navigation-bar';
 import { ProfileView } from '../ProfileView/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [genreFilter, setGenreFilter] = useState(null);
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
@@ -25,29 +26,12 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-        setMovies(movies);
-
-        // const moviesFromApi = movies.map((movie) => {
-        //   return {
-        //     Id: movie._id,
-        //     Title: movie.Title,
-        //     Image: movie.ImagePath,
-        //     Description: movie.Description,
-        //     Genre: {
-        //       Name: movie.Genre.Name,
-        //       Description: movie.Genre.Description,
-        //     },
-
-        //     Director: {
-        //       Name: movie.Director.Name,
-        //       Bio: movie.Director.Bio,
-        //     },
-        //   };
-        // });
-
-        // setMovies(moviesFromApi);
+        const filteredMovies = genreFilter
+          ? movies.filter((movie) => movie.Genre.Name === genreFilter)
+          : movies;
+        setMovies(filteredMovies);
       });
-  }, [token]);
+  }, [token, genreFilter]);
 
   return (
     <BrowserRouter>
@@ -55,9 +39,36 @@ export const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
+          setGenreFilter(null); // Reset genre filter when user logs out
         }}
       />
+
       <Row className='justify-content-md-center'>
+        <Dropdown>
+          <Dropdown.Toggle variant='primary' id='genreFilterDropdown'>
+            Filter by Genre
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => setGenreFilter('')}>
+              All Genres
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setGenreFilter('Action')}>
+              Action
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setGenreFilter('Science-Fiction')}>
+              Sci-Fi
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setGenreFilter('Horror')}>
+              Horror
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setGenreFilter('Comedy')}>
+              Comedy
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setGenreFilter('Thriller')}>
+              Thriller
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <Routes>
           <Route
             path='/login'
