@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import './movie-card.scss';
 
 export const MovieCard = ({ movie, token, setUser, user }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -72,7 +73,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   };
 
   return (
-    <Card className='p-1 border-0 h-100'>
+    <Card className='p1 border-0 h-100'>
       <Card.Img className='m-3' src={movie.ImagePath} />
 
       <Card.Body>

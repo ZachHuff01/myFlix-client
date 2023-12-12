@@ -1,8 +1,54 @@
-.back-button {
-  padding: 4px 12px 4px 12px;
-  color: whitesmoke;
-  background-color: dodgerblue;
-  border: none;
-  border-radius: 4px;
-}
+// .back-button {
+//   padding: 4px 12px 4px 12px;
+//   color: whitesmoke;
+//   background-color: dodgerblue;
+//   border: none;
+//   border-radius: 4px;
+// }
 
+// movie-view.scss
+
+.movie-view {
+  background-color: black;
+  color: white;
+
+  .movie-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .poster {
+      max-width: 200px;
+      max-height: 300px;
+      border: 1px solid grey;
+      margin-right: 20px;
+    }
+
+    .details {
+      flex: 1;
+
+      h2 {
+        color: red;
+      }
+
+      span {
+        color: grey;
+      }
+    }
+  }
+
+  .back-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+
+    &:hover {
+      background-color: darkred;
+    }
+  }
+}
