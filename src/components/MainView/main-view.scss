@@ -1,2 +1,23 @@
+$secondaryBGMixer: rgba(156, 169, 182, 0.7);
+$primaryColor: rgb(0, 0, 0);
+
+.searchContainer {
+  flex-direction: column;
+}
+
+input.search-bar, select.filter-bar {
+  max-width: 300px !important;
+  margin: 5px auto;
+  border-color: $primaryColor !important;
+  // color: $primaryColor !important;
+}
+
+
+
+  
+
+
+
+
 
 

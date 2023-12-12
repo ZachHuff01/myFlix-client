@@ -9,17 +9,25 @@ import { ProfileView } from '../ProfileView/profile-view';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Dropdown } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import './main-view.scss';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
-  const [genreFilter, setGenreFilter] = useState(null);
-  const [titleFilter, setTitleFilter] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterTerm, setFilterTerm] = useState('');
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+
+  // An array of all genres for my filter function
+  const genres = [];
+  movies.forEach((movie) => {
+    if (genres.indexOf(movie.Genre.Name) === -1) {
+      genres.push(movie.Genre.Name);
+    }
+  });
 
   useEffect(() => {
     if (!token) return;
@@ -31,14 +39,14 @@ export const MainView = () => {
       .then((movies) => {
         const filteredMovies = movies.filter(
           (movie) =>
-            (!genreFilter || movie.Genre.Name === genreFilter) &&
-            (!titleFilter ||
-              movie.Title.toLowerCase().includes(titleFilter.toLowerCase()))
+            (!filterTerm || movie.Genre.Name === filterTerm) &&
+            (!searchTerm ||
+              movie.Title.toLowerCase().includes(searchTerm.toLowerCase()))
         );
 
         setMovies(filteredMovies);
       });
-  }, [token, genreFilter, titleFilter]);
+  }, [token, filterTerm, searchTerm]);
 
   return (
     <BrowserRouter>
@@ -46,46 +54,11 @@ export const MainView = () => {
         user={user}
         onLoggedOut={() => {
           setUser(null);
-          setGenreFilter(null); // Reset genre filter when user logs out
+          setFilterTerm(null); // Reset genre filter when user logs out
         }}
       />
 
       <Row className='justify-content-md-center'>
-        <Form.Group controlId='titleFilterInput'>
-          <Form.Control
-            type='text'
-            placeholder='Search by Title'
-            value={titleFilter}
-            onChange={(e) => setTitleFilter(e.target.value)}
-          />
-        </Form.Group>
-
-        <Dropdown>
-          <Dropdown.Toggle variant='primary' id='genreFilterDropdown'>
-            Filter by Genre
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setGenreFilter('')}>
-              All Genres
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setGenreFilter('Action')}>
-              Action
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setGenreFilter('Science-Fiction')}>
-              Sci-Fi
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setGenreFilter('Horror')}>
-              Horror
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setGenreFilter('Comedy')}>
-              Comedy
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setGenreFilter('Thriller')}>
-              Thriller
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-
         <Routes>
           <Route
             path='/login'
@@ -144,22 +117,85 @@ export const MainView = () => {
             path='/'
             element={
               <>
+                <Row className='searchContainer d-flex mt-4'>
+                  <Form.Control
+                    type='text'
+                    placeholder='Search...'
+                    className='search-bar'
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    // onChange={handleChange}
+                    // onChange={(e) => handleSearch(e.target.value)}
+                    id='movie-search'
+                  />
+                  {/* Set up a dropdown menu populated with each movie genre I can filter by */}
+                  <Form.Select
+                    className='filter-bar'
+                    onChange={(e) => setFilterTerm(e.target.value)}
+                    value={filterTerm}
+                  >
+                    <option value=''>All Genres</option>
+                    {genres.map((genre) => (
+                      <option key={genre} value={genre}>
+                        {genre}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Row>
                 {!user ? (
-                  <Navigate to='login' replace />
+                  <Navigate to='/login' replace />
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col classname='mb-4' key={movie._id} md={3}>
-                        <MovieCard
-                          movie={movie}
-                          user={user}
-                          setUser={setUser}
-                          token={token}
-                        />
-                      </Col>
-                    ))}
+                    {movies
+                      .filter((movie) => {
+                        if (searchTerm === '' && filterTerm === '') {
+                          return movie;
+                        } else if (
+                          searchTerm !== '' &&
+                          movie.Title.toLowerCase().includes(
+                            searchTerm.toLowerCase()
+                          )
+                        ) {
+                          if (filterTerm !== '') {
+                            return movie.Genre.Name.toLowerCase().includes(
+                              filterTerm.toLowerCase()
+                            );
+                          } else {
+                            return movie;
+                          }
+                        } else if (
+                          filterTerm !== '' &&
+                          movie.Genre.Name.toLowerCase().includes(
+                            filterTerm.toLowerCase()
+                          )
+                        ) {
+                          if (searchTerm !== '') {
+                            return movie.Title.toLowerCase().includes(
+                              searchTerm.toLowerCase()
+                            );
+                          } else {
+                            return movie;
+                          }
+                        }
+                      })
+                      .map((movie) => (
+                        <Col
+                          key={movie.id}
+                          sm={6}
+                          md={4}
+                          lg={3}
+                          className='mb-3 mt-3 cardContainer'
+                        >
+                          <MovieCard
+                            movie={movie}
+                            user={user}
+                            token={token}
+                            setUser={setUser}
+                          />
+                        </Col>
+                      ))}
                   </>
                 )}
               </>

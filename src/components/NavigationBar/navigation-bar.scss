@@ -1,0 +1,30 @@
+// navigation-bar.scss
+
+.navbar .container {
+  color: rgb(247, 249, 247);
+  background-color: rgb(6, 6, 6);
+}
+
+.container .navbar-brand {
+  color: rgb(250, 252, 250);
+
+  &:hover {
+    color: white;
+  }
+}
+
+.container .navbar-toggler {
+  color: rgb(255, 0, 0);
+  margin-top: 10;
+}
+.navbar-toggler-icon {
+  background-color: rgb(241, 244, 241);
+}
+
+.nav-link {
+  color: rgb(251, 249, 249) !important;
+
+  &:hover {
+    color: red !important;
+  }
+}

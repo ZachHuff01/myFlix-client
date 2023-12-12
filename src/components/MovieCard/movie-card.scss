@@ -1,1 +1,70 @@
+// movie-card.scss
+
+.card  {
+  background-color: black;
+  color: rgb(255, 255, 255);
+  border: 1px solid grey;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &:hover {
+    border-color: red;
+  }
+
+  .card-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  
+  }
+
+  .card-title {
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+   display: none;
+  }
+
+  .btn {
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darkred;
+    }
+  }
+
+  .close-open-btn {
+    background-color: red;
+    color: white;
+
+    &:hover {
+      background-color: darkred;
+    }
+  }
+
+  .favorite-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .fav-btn {
+      background-color: red;
+      color: white;
+      font-size: 1rem;
+      padding: 5px;
+
+      &:hover {
+        background-color: darkred;
+      }
+    }
+  }
+}
+
 
