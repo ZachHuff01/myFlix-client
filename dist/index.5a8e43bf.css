@@ -12,8 +12,8 @@
 
 .card .card-img {
   object-fit: cover;
-  max-width: 100%;
-  height: auto;
+  width: 86%;
+  height: 85%;
 }
 
 .card .card-title {
